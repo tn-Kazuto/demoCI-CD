@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SPIDER-VERSE</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/milesmorales_mvc.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Teko:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            background-color: #111116 !important;
+            color: #fff !important;
+            position: relative;
+            z-index: 1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Halftone Comic Pattern Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(rgba(255, 0, 64, 0.35) 1px, transparent 1px),
+                radial-gradient(rgba(0, 229, 255, 0.2) 1px, transparent 1px);
+            background-size: 8px 8px;
+            background-position: 0 0, 4px 4px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Navbar Design */
+        .spider-navbar {
+            background-color: rgba(15, 15, 20, 0.95) !important;
+            border-bottom: 4px solid #ff0044 !important;
+            box-shadow: 0 8px 0px rgba(0, 229, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .spider-brand {
+            font-family: 'Bangers', cursive;
+            font-size: 2.8rem;
+            color: #fff !important;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #ff0044, -3px -3px 0px #00e5ff;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-right: 30px;
+        }
+
+        .spider-brand:hover {
+            transform: scale(1.08) rotate(-3deg);
+        }
+
+        .spider-nav-link {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.8rem;
+            color: #e0e0e0 !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-left: 20px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .spider-nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 4px;
+            bottom: -5px;
+            left: 0;
+            background-color: #00e5ff;
+            transition: width 0.3s;
+        }
+
+        .spider-nav-link:hover {
+            color: #fff !important;
+            text-shadow: 0 0 10px #00e5ff;
+            transform: translateY(-2px);
+        }
+
+        .spider-nav-link:hover::after {
+            width: 100%;
+            background-color: #ff0044;
+            box-shadow: 0 0 10px #ff0044;
+        }
+
+        /* Main container flex fill to push footer down */
+        .main-container {
+            flex: 1;
+            padding-top: 30px;
+        }
+
+        .spider-footer {
+            background-color: #0a0a0f;
+            border-top: 4px dashed #00e5ff;
+            padding: 25px 0;
+            text-align: center;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.4rem;
+            color: #aaa;
+            margin-top: 30px;
+            letter-spacing: 1.5px;
+        }
+        
+        .spider-footer a {
+            color: #ff0044;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 700;
+        }
+        .spider-footer a:hover {
+            color: #00e5ff;
+            text-shadow: 0 0 10px #00e5ff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm spider-navbar mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand spider-brand" asp-area="" asp-controller="Home" asp-action="Index">MILES MORALES</a>
+                <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link spider-nav-link" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link spider-nav-link" asp-area="" asp-controller="Color" asp-action="Index">Colors</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link spider-nav-link" asp-area="" asp-controller="Brand" asp-action="Index">Brand</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container main-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="spider-footer">
+        <div class="container">
+            &copy; 2026 - Earth-1610 Archive - MULTIVERSE DATA - <a asp-area="" asp-controller="Home" asp-action="Privacy">CLASSIFIED</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

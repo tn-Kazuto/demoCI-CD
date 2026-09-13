@@ -1,0 +1,283 @@
+@model IEnumerable<milesmorales_mvc.Models.Color>
+
+@{
+    ViewData["Title"] = "Color Universe";
+}
+
+<style>
+
+    body {
+        background-color: #111116 !important;
+        color: #fff !important;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Halftone Comic Pattern Background */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: 
+            radial-gradient(rgba(255, 0, 64, 0.45) 1px, transparent 1px),
+            radial-gradient(rgba(0, 229, 255, 0.25) 1px, transparent 1px);
+        background-size: 8px 8px;
+        background-position: 0 0, 4px 4px;
+        z-index: -2;
+        pointer-events: none;
+    }
+
+    .spiderverse-container {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        padding: 3rem;
+        background-color: rgba(15, 15, 20, 0.95);
+        border: 5px solid #fff;
+        /* Comic offset shadow - classic Spider-Verse / Comic book trope */
+        box-shadow: 15px 15px 0px #ff0044, -15px -15px 0px #00e5ff;
+        border-radius: 2px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    /* Spray painted Miles Morales logo in the background */
+    .spiderverse-watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 600px;
+        opacity: 0.08;
+        pointer-events: none;
+        z-index: 0;
+        filter: drop-shadow(0 0 15px #ff0044);
+    }
+
+    .spiderverse-title {
+        font-family: 'Bangers', cursive;
+        font-size: 6rem;
+        color: white;
+        text-align: center;
+        margin-bottom: 30px;
+        letter-spacing: 6px;
+        /* Chromatic Aberration Effect */
+        text-shadow: 
+            5px 0px 0px rgba(255, 0, 68, 0.9), 
+            -5px 0px 0px rgba(0, 240, 255, 0.9),
+            0px 0px 20px rgba(255, 255, 255, 0.5);
+        transform: rotate(-3deg);
+        position: relative;
+        z-index: 2;
+    }
+
+    .btn-create {
+        display: inline-block;
+        font-family: 'Bangers', cursive;
+        font-size: 2rem;
+        background-color: #ff0044;
+        color: #fff !important;
+        padding: 12px 30px;
+        text-transform: uppercase;
+        border: 4px solid #fff;
+        box-shadow: 6px 6px 0px #00e5ff;
+        text-decoration: none;
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform: rotate(2deg);
+        margin-bottom: 40px;
+        position: relative;
+        z-index: 2;
+        letter-spacing: 2px;
+    }
+
+    .btn-create:hover {
+        transform: scale(1.1) rotate(-1deg);
+        box-shadow: 10px 10px 0px #00e5ff, -5px -5px 0px #ff0044;
+        background-color: #000;
+        color: #00e5ff !important;
+        border-color: #00e5ff;
+    }
+
+    .spiderverse-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 15px;
+        font-family: 'Teko', sans-serif;
+        font-size: 1.6rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .spiderverse-table th {
+        font-family: 'Bangers', cursive;
+        font-size: 2.2rem;
+        color: #fff;
+        text-shadow: 3px 3px 0px #ff0044;
+        letter-spacing: 3px;
+        border-bottom: 4px solid #00e5ff;
+        padding-bottom: 15px;
+        text-align: left;
+    }
+
+    .spiderverse-table td {
+        background: rgba(26, 26, 36, 0.9);
+        border-top: 2px solid #444;
+        border-bottom: 2px solid #444;
+        padding: 15px 20px;
+        vertical-align: middle;
+    }
+
+    .spiderverse-table td:first-child {
+        border-left: 6px solid #ff0044;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+    
+    .spiderverse-table td:last-child {
+        border-right: 6px solid #00e5ff;
+    }
+
+    .spiderverse-table tr {
+        transition: all 0.2s;
+    }
+
+    .spiderverse-table tr:hover {
+        transform: scale(1.03) translateX(10px);
+        box-shadow: -15px 0px 0px rgba(0, 229, 255, 0.8), 15px 0px 0px rgba(255, 0, 68, 0.8);
+    }
+    
+    .spiderverse-table tr:hover td {
+        background: #000;
+    }
+
+    .action-links {
+        display: flex;
+        gap: 15px;
+    }
+
+    .action-links a {
+        display: inline-block;
+        font-family: 'Teko', sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 5px 20px;
+        border: 3px solid #fff;
+        color: #fff;
+        background: #111;
+        transition: all 0.2s;
+        box-shadow: 3px 3px 0px rgba(255,255,255,0.3);
+    }
+
+    .link-edit {
+        border-color: #00e5ff !important;
+        color: #00e5ff !important;
+        box-shadow: 4px 4px 0px #00e5ff !important;
+    }
+    .link-edit:hover {
+        background: #00e5ff !important;
+        color: #000 !important;
+        transform: translate(-3px, -3px);
+        box-shadow: 8px 8px 0px #00e5ff !important;
+    }
+
+    .link-details {
+        border-color: #bf00ff !important;
+        color: #bf00ff !important;
+        box-shadow: 4px 4px 0px #bf00ff !important;
+    }
+    .link-details:hover {
+        background: #bf00ff !important;
+        color: #fff !important;
+        transform: translate(-3px, -3px);
+        box-shadow: 8px 8px 0px #bf00ff !important;
+    }
+
+    .link-delete {
+        border-color: #ff0044 !important;
+        color: #ff0044 !important;
+        box-shadow: 4px 4px 0px #ff0044 !important;
+    }
+    .link-delete:hover {
+        background: #ff0044 !important;
+        color: #fff !important;
+        transform: translate(-3px, -3px);
+        box-shadow: 8px 8px 0px #ff0044 !important;
+    }
+
+    .color-preview {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid #fff;
+        box-shadow: 5px 5px 0px #000;
+        vertical-align: middle;
+        margin-right: 20px;
+        transform: rotate(-15deg);
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .spiderverse-table tr:hover .color-preview {
+        transform: rotate(10deg) scale(1.3);
+    }
+    
+    .hex-code {
+        background: #000;
+        color: #00e5ff;
+        padding: 5px 15px;
+        font-family: 'Courier New', monospace;
+        font-size: 1.4rem;
+        border: 2px dashed #ff0044;
+        font-weight: bold;
+    }
+</style>
+
+<div class="spiderverse-container">
+    <!-- Miles Morales Spray Paint Spider Logo as Watermark -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Miles_Morales_spider_logo.svg/1024px-Miles_Morales_spider_logo.svg.png" class="spiderverse-watermark" alt="Spider Logo Background" />
+
+    <h1 class="spiderverse-title">ANOMALY COLORS</h1>
+
+    <div style="text-align: center;">
+        <a asp-action="Create" class="btn-create">INITIALIZE NEW ANOMALY</a>
+    </div>
+
+    <table class="spiderverse-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ColorName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ColorHex)
+                </th>
+                <th style="padding-left: 15px;">
+                    ACTIONS
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.ColorName)
+                </td>
+                <td>
+                    <span class="color-preview" style="background-color: @item.ColorHex"></span>
+                    <span class="hex-code">@Html.DisplayFor(model => item.ColorHex)</span>
+                </td>
+                <td>
+                    <div class="action-links">
+                        <a asp-action="Edit" asp-route-id="@item.ColorId" class="link-edit">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.ColorId" class="link-details">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.ColorId" class="link-delete">Delete</a>
+                    </div>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
+
