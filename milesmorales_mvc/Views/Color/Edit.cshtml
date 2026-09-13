@@ -1,0 +1,150 @@
+@model milesmorales_mvc.Models.Color
+
+@{
+    ViewData["Title"] = "Update Anomaly";
+}
+
+<style>
+    .spider-create-container {
+        max-width: 600px;
+        margin: 4rem auto;
+        padding: 3.5rem;
+        background-color: rgba(15, 15, 20, 0.95);
+        border: 5px solid #fff;
+        box-shadow: 12px 12px 0px #00e5ff, -12px -12px 0px #ff0044; /* Flipped colors for edit */
+        border-radius: 2px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .spider-create-title {
+        font-family: 'Bangers', cursive;
+        font-size: 3.8rem;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 35px;
+        letter-spacing: 4px;
+        text-shadow: 4px 4px 0px #00e5ff, -3px -3px 0px #ff0044;
+        transform: rotate(2deg); /* rotated opposite to create */
+    }
+
+    .spider-label {
+        font-family: 'Teko', sans-serif;
+        font-size: 1.8rem;
+        color: #e0e0e0;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .spider-input {
+        background-color: #111;
+        border: 2px solid #555;
+        color: #00e5ff;
+        font-family: 'Courier New', monospace;
+        font-size: 1.4rem;
+        padding: 12px 15px;
+        width: 100%;
+        border-radius: 2px;
+        transition: all 0.3s;
+        box-shadow: inset 3px 3px 6px rgba(0,0,0,0.5);
+        margin-bottom: 10px;
+    }
+
+    .spider-input:focus {
+        outline: none;
+        border-color: #00e5ff;
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+        transform: scale(1.02);
+    }
+
+    .spider-btn-submit {
+        display: block;
+        width: 100%;
+        font-family: 'Bangers', cursive;
+        font-size: 2.2rem;
+        color: #111;
+        background: #00e5ff;
+        padding: 15px;
+        border: 3px solid #fff;
+        box-shadow: 6px 6px 0px #ff0044;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 25px;
+    }
+
+    .spider-btn-submit:hover {
+        transform: translateY(-5px);
+        background: #fff;
+        color: #000;
+        box-shadow: -6px 6px 0px #00e5ff;
+        border-color: #00e5ff;
+    }
+
+    .spider-back-link {
+        display: inline-block;
+        font-family: 'Teko', sans-serif;
+        font-size: 1.6rem;
+        color: #fff;
+        text-transform: uppercase;
+        text-decoration: none;
+        margin-top: 30px;
+        border-bottom: 2px dashed #00e5ff;
+        transition: all 0.2s;
+        letter-spacing: 1px;
+    }
+
+    .spider-back-link:hover {
+        color: #00e5ff;
+        text-shadow: 0 0 10px #00e5ff;
+        border-bottom-color: #ff0044;
+    }
+
+    .text-danger {
+        font-family: 'Teko', sans-serif;
+        font-size: 1.4rem;
+        color: #ff0044 !important;
+        display: block;
+        margin-bottom: 15px;
+        text-shadow: 0 0 5px rgba(255,0,68,0.5);
+    }
+</style>
+
+<div class="container d-flex justify-content-center">
+    <div class="spider-create-container w-100">
+        <h1 class="spider-create-title">UPDATE ANOMALY</h1>
+        
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!-- Include Hidden ID for Edit -->
+            <input type="hidden" asp-for="ColorId" />
+            
+            <div class="form-group mb-3">
+                <label asp-for="ColorName" class="spider-label">COLOR DESIGNATION</label>
+                <input asp-for="ColorName" class="spider-input" autocomplete="off" />
+                <span asp-validation-for="ColorName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ColorHex" class="spider-label">HEX SIGNATURE</label>
+                <input asp-for="ColorHex" class="spider-input" autocomplete="off" />
+                <span asp-validation-for="ColorHex" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="spider-btn-submit">OVERRIDE DATA</button>
+            </div>
+            
+            <div class="text-center">
+                <a asp-action="Index" class="spider-back-link">&lt; CANCEL & RETURN</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

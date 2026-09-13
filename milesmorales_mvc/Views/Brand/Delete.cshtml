@@ -1,0 +1,128 @@
+@model milesmorales_mvc.Models.Brand
+
+@{
+    ViewData["Title"] = "Purge Brand";
+}
+
+<style>
+    .spider-delete-card {
+        max-width: 500px;
+        margin: 5rem auto;
+        padding: 0;
+        background-color: rgba(15, 15, 20, 0.95);
+        border: 4px solid #fff;
+        box-shadow: 15px 15px 0px #ff0044, -15px -15px 0px #000;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .spider-card-header {
+        background: #ff0044;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 4px solid #fff;
+    }
+
+    .spider-card-title {
+        font-family: 'Bangers', cursive;
+        font-size: 3.5rem;
+        color: #fff;
+        margin: 0;
+        letter-spacing: 5px;
+        text-shadow: 3px 3px 0 #000;
+    }
+
+    .warning-text {
+        font-family: 'Teko', sans-serif;
+        font-size: 1.8rem;
+        color: #ff0044;
+        text-align: center;
+        margin-top: 20px;
+        letter-spacing: 1px;
+    }
+
+    .spider-card-body {
+        padding: 10px 30px 30px 30px;
+    }
+
+    .detail-label {
+        font-family: 'Teko', sans-serif;
+        font-size: 1.8rem;
+        color: #00e5ff;
+        margin-bottom: 5px;
+        letter-spacing: 1.5px;
+        border-bottom: 1px dashed #444;
+    }
+
+    .detail-value {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.6rem;
+        color: #fff;
+        margin-bottom: 25px;
+        font-weight: bold;
+    }
+
+    .spider-action-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .spider-btn {
+        flex: 1;
+        text-align: center;
+        font-family: 'Teko', sans-serif;
+        font-size: 1.8rem;
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 15px;
+        border: 2px solid #fff;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        background: #111;
+        box-shadow: 4px 4px 0px rgba(255,255,255,0.2);
+        cursor: pointer;
+    }
+
+    .btn-purge {
+        border-color: #ff0044;
+        color: #ff0044;
+    }
+    .btn-purge:hover {
+        background: #ff0044;
+        color: #fff;
+        box-shadow: 6px 6px 0px #ff0044;
+        transform: translate(-2px, -2px);
+    }
+
+    .btn-cancel {
+        border-color: #00e5ff;
+        color: #00e5ff;
+    }
+    .btn-cancel:hover {
+        background: #00e5ff;
+        color: #000;
+        box-shadow: 6px 6px 0px #00e5ff;
+        transform: translate(-2px, -2px);
+    }
+</style>
+
+<div class="spider-delete-card">
+    <div class="spider-card-header">
+        <h1 class="spider-card-title">WARNING: PURGE</h1>
+    </div>
+    
+    <p class="warning-text">ARE YOU CERTAIN YOU WANT TO PERMANENTLY ERASE THIS RECORD?</p>
+    
+    <div class="spider-card-body">
+        <div class="detail-label">DESIGNATION</div>
+        <div class="detail-value">@Html.DisplayFor(model => model.BrandName)</div>
+
+        <form asp-action="Delete" class="spider-action-row">
+            <input type="hidden" asp-for="BrandId" />
+            <button type="submit" class="spider-btn btn-purge">PURGE</button>
+            <a asp-action="Index" class="spider-btn btn-cancel">CANCEL</a>
+        </form>
+    </div>
+</div>
